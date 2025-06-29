@@ -1,11 +1,11 @@
 import './App.css'
-import Login from './components/Login.jsx';
-import Register from './components/Register.jsx';
-import LoginRegisterPage from './pages/LoginRegisterPage.jsx';
+import Login from './components/Login';
+import Register from './components/Register';
 function App() {
   return (
     <>
-      <LoginRegisterPage />
+      <Login />
+      {/* <Register /> */}
     </>
   );
 }

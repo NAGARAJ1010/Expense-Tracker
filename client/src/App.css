@@ -1,10 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
 :root{
-    --primary-font:'Roboto', sans-serif;
+    --primary-font:'Noto Sans', sans-serif;
     --primary-color:#9c88ff;
     --gray-color:#dcdde1;
+    --input-bg-color: #f6f6f6;
+    --input-text-color: #616161;
+    --input-value-color: #1d1d1f;
     --subtle-black-color:#1e272e;
     --danger-color:#ff3f34;
 }
@@ -14,19 +17,4 @@ body{
     box-sizing: border-box;
     font-family: var(--primary-font);
     color: var(--subtle-black-color);
-}
-
-.form-input-container{
-    @apply flex flex-col gap-1 capitalize;
-}
-
-.form-input-container input{
-    @apply py-1 px-2 bg-slate-100 rounded-sm outline-none;
-}
-
-.form-input-container p{
-    @apply text-xs text-(--danger-color) hidden;
-}
-.hr-line{
-    @apply h-[1px] w-full border-[0.5px] border-(--gray-color) rounded-md;
 }
