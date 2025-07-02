@@ -1,13 +1,13 @@
-import './App.css'
-import Login from './components/Login';
-import Register from './components/Register';
+import "./App.css";
+import LoginOptionPage from "./pages/LoginOptionPage";
+import LoginRegisterPage from "./pages/LoginRegisterPage";
 function App() {
   return (
     <>
-      <Login />
-      {/* <Register /> */}
+      {/* <LoginOptionPage /> */}
+      <LoginRegisterPage />
     </>
   );
 }
 
-export default App
+export default App;

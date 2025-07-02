@@ -1,12 +1,20 @@
 @import "tailwindcss";
-.form-input-container{
-    @apply bg-(--input-bg-color) w-full flex flex-col gap-1 text-xs rounded-xl px-4 py-2 text-(--input-text-color);
+.form-input-container {
+  @apply bg-(--input-bg-color) w-full flex flex-col gap-1 text-xs rounded-xl px-4 py-2 text-(--input-text-color);
 }
 
-.form-input-container input{
-    @apply outline-none text-(--input-value-color) font-medium text-sm w-full;
+.form-input-container input {
+  @apply outline-none text-(--input-value-color) font-medium text-sm w-full;
 }
 
-.eye-icon{
-    @apply absolute right-0 bottom-1
+.eye-icon {
+  @apply absolute right-3 bottom-2.5 z-1 bg-(--input-bg-color) cursor-pointer;
+}
+
+.social-media-icon {
+  @apply bg-(--input-bg-color) py-4 px-8 w-6 h-6 rounded-xl text-xl cursor-pointer;
+}
+
+.login-btn{
+    @apply uppercase py-3 block rounded-xl transition-colors duration-300;
 }

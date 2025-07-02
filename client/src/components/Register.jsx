@@ -10,7 +10,7 @@ const Register = () => {
         setShowPassword(inputValue.trim() !== '' ? 'block' : 'hidden');
     }
   return (
-    <form action="" className="register-form flex flex-col gap-4">
+    <>
       <div className="form-input-container">
         <label htmlFor="name">Full name</label>
         <input type="text" id="name" />
@@ -39,7 +39,7 @@ const Register = () => {
           <FontAwesomeIcon icon={faEyeSlash} className="eye-icon" />
         </div>
       </div>
-    </form>
+    </>
   );
 }
 
