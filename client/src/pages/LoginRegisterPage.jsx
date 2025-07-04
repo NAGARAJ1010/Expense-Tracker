@@ -17,7 +17,7 @@ const LoginRegisterPage = ({ authMode, setAuthMode }) => {
   };
   return (
     <section className="login-register-container bg-(--primary-color) lg:bg-white lg:flex lg:rounded-3xl gap-6 max-w-[80rem] p-6 h-screen mx-auto">
-      <section className="hidden lg:block w-1/2 rounded-3xl overflow-hidden">
+      <section className="hidden lg:block w-1/2 rounded-3xl overflow-hidden shadow-2xl">
         <img
           src="../assets/11669054_20943670.svg"
           alt=""
@@ -35,7 +35,7 @@ const LoginRegisterPage = ({ authMode, setAuthMode }) => {
                 Your financial clarity starts with a single step
               </p>
             </div>
-            <div className="w-15 h-15 cursor-pointer">
+            <div className="w-15 h-15 cursor-pointer" onClick={()=> navigateTo('')}>
               <img className="w-full h-full" src="../assets/logo.png" alt="" />
             </div>
           </div>

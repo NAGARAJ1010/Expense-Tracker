@@ -20,5 +20,5 @@
 }
 
 .login-btn {
-  @apply uppercase py-3 block rounded-xl transition-colors duration-300 cursor-pointer;
+  @apply uppercase py-3 block rounded-xl transition-colors duration-300 cursor-pointer w-full max-w-[20rem];
 }
