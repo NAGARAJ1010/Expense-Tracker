@@ -4,11 +4,16 @@ import "../css/login.css";
 import { useState } from "react";
 const Login = () => {
   const [showPassword, setShowPassword] = useState("hidden");
+  const [toggleIcon, setToggleIcon] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const passwordHandler = (e) => {
-    setInputValue(e.target.value);
-    setShowPassword(inputValue.trim() !== "" ? "block" : "hidden");
-  };
+  let isEyeClicked = true;
+  const handlePassword = (e) => {
+    
+  }
+
+  const toggleEyeIcon = () => {
+    setToggleIcon(prev => !prev);
+  }
   return (
     <>
       <div className="form-input-container">
@@ -18,17 +23,22 @@ const Login = () => {
       <div className="form-input-container relative">
         <label htmlFor="password">Password</label>
         <input
-          type="password"
+          type={`${toggleIcon ? 'text' : 'password'}`}
           id="password"
-          onChange={(event) => passwordHandler(event)}
+          onClick={() => setShowPassword("block")}
+          onChange={(e) => handlePassword(e)}
         />
-        <span className={`eye-icon ${showPassword}`}>
-          <FontAwesomeIcon icon={faEye} />
-        </span>
-        <span className={`eye-icon ${showPassword}`}>
-          <FontAwesomeIcon icon={faEyeSlash} />
-        </span>
+        <div className={`eye-icon-container ${showPassword}`} onClick={toggleEyeIcon}>
+          <span className="eye-icon block">
+            <FontAwesomeIcon icon={toggleIcon ? faEye : faEyeSlash} />
+          </span>
+        </div>
       </div>
+      <p className="bottom-msg text-xs text-end">
+        <a href="#" className="text-(--primary-color)">
+          Forgot password?
+        </a>
+      </p>
     </>
   );
 };

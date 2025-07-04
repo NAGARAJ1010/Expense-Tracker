@@ -3,12 +3,15 @@ import { faEyeSlash, faEye } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from 'react';
 const Register = () => {
-    const [showPassword, setShowPassword] = useState('hidden');
+  const [showPassword, setShowPassword] = useState('hidden');
+  const [showConPassword, setShowConPassword] = useState('hidden');
+  const [togglePasswordIcon, setTogglePasswordIcon] = useState(false);
+  const [toggleConPasswordIcon, setToggleConPasswordIcon] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const passwordHandler = (e) => {
         setInputValue(e.target.value);
         setShowPassword(inputValue.trim() !== '' ? 'block' : 'hidden');
-    }
+  }
   return (
     <>
       <div className="form-input-container">
@@ -19,24 +22,44 @@ const Register = () => {
         <label htmlFor="email">E-mail</label>
         <input type="text" id="email" />
       </div>
-      <div className="form-input-container">
+      <div className="form-input-container register">
         <label htmlFor="password">Password</label>
         <div className="relative">
-          <input type="password" id="password" onChange={(event)=>passwordHandler(event)}/>
-          <span className={`eye-icon ${showPassword}`}>
-          <FontAwesomeIcon icon={faEye} />
-          </span>
-          <span className={`eye-icon ${showPassword}`}>
-          <FontAwesomeIcon icon={faEyeSlash} />
-          </span>
+          <input
+            type={`${togglePasswordIcon ? "text" : "password"}`}
+            id="password"
+            onClick={() => setShowPassword("block")}
+            onChange={(event) => passwordHandler(event)}
+          />
+          <div
+            className={`eye-icon-container ${showPassword}`}
+            onClick={() => setTogglePasswordIcon((prev) => !prev)}
+          >
+            <span className="eye-icon block">
+              <FontAwesomeIcon icon={togglePasswordIcon ? faEye : faEyeSlash} />
+            </span>
+          </div>
         </div>
       </div>
-      <div className="form-input-container">
+      <div className="form-input-container register">
         <label htmlFor="confirm-password">Confirm password</label>
         <div className="relative">
-          <input type="password" id="confirm-password" />
-          <FontAwesomeIcon icon={faEye} className="eye-icon" />
-          <FontAwesomeIcon icon={faEyeSlash} className="eye-icon" />
+          <input
+            type={`${toggleConPasswordIcon ? "text" : "password"}`}
+            id="confirm-password"
+            onClick={() => setShowConPassword("block")}
+            onChange={(e) => handlePassword(e)}
+          />
+          <div
+            className={`eye-icon-container ${showConPassword}`}
+            onClick={() => setToggleConPasswordIcon((prev) => !prev)}
+          >
+            <span className="eye-icon block">
+              <FontAwesomeIcon
+                icon={toggleConPasswordIcon ? faEye : faEyeSlash}
+              />
+            </span>
+          </div>
         </div>
       </div>
     </>
