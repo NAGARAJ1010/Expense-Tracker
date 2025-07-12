@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+import logo from '../assets/logo.png'
 const LoginOptionPage = ({ authMode, setAuthMode }) => {
   const navigate = useNavigate();
   const navigateTo = (mode) => {
@@ -8,8 +8,8 @@ const LoginOptionPage = ({ authMode, setAuthMode }) => {
   };
   return (
     <section className="bg-(--primary-color) px-6 flex flex-col items-center justify-center gap-18 h-screen">
-      <div className="w-30 h-30 bg-white">
-        <img src="../assets/logo.png" alt="" className="w-full h-full" />
+      <div className="w-40 h-40">
+        <img src={logo} alt="logo" className="w-full h-full turn-white" />
       </div>
       <h1 className="capitalize text-white text-4xl text-center">
         track smarter.
