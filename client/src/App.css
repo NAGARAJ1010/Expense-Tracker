@@ -14,18 +14,39 @@
 body {
   margin: 0;
   padding: 0;
+  width: 100vw;
+  height: 100vh;
   box-sizing: border-box;
   font-family: var(--primary-font);
   color: var(--subtle-black-color);
 }
 
-.h-vw{
-  height: 100vw;
+#root, main {
+  height: 100vh;
+  width: 100%;
 }
 
+.turn-white{
+  @apply invert brightness-0;
+}
 input:-webkit-autofill {
   box-shadow: 0 0 0px 1000px var(--input-bg-color) inset !important;
   -webkit-box-shadow: 0 0 0px 1000px var(--input-bg-color) inset !important;
   -webkit-text-fill-color: var(--input-value-color) !important;
 }
 
+.menu-option{
+  @apply w-13 cursor-pointer hover:bg-[#9c88ff] p-3 rounded-[100%] transition-all duration-300 flex gap-4 items-center;
+}
+
+.menu-option-name{
+  @apply capitalize text-white 
+}
+
+.menu button{
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
+}
+
+.dashboard .menu-md-screen{
+  @apply hidden;
+}
