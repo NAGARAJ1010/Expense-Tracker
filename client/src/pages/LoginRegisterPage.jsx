@@ -17,8 +17,8 @@ const LoginRegisterPage = ({ authMode, setAuthMode }) => {
     navigate(`/${mode}`);
   };
   return (
-    <section className="login-register-container bg-(--primary-color) lg:bg-white lg:flex lg:rounded-3xl lg:p-6 max-w-[80rem] h-screen mx-auto">
-      <div className="lg:bg-white lg:flex lg:rounded-3xl border border-(--primary-color) w-full">
+    <section className="login-register-container bg-(--primary-color) lg:bg-white lg:flex lg:rounded-3xl lg:p-6 max-w-[60rem] h-screen mx-auto">
+      <div className="lg:bg-white lg:flex lg:rounded-3xl bg-red-500 w-full">
         <section className="hidden lg:flex w-1/2 rounded-tl-3xl rounded-bl-3xl overflow-hidden flex-col justify-center items-center gap-4">
           <h1 className="text-5xl capitalize text-center text-(--primary-color)">expense tracker</h1>
           <p className="bg-(--primary-color) text-white text-2xl capitalize text-center py-3 px-4 inline-block w-fit">track smarter. spend smarter</p>
@@ -46,9 +46,9 @@ const LoginRegisterPage = ({ authMode, setAuthMode }) => {
             </div>
           </div>
           <div className="form-section-container bg-(--primary-color) flex-1">
-            <div className="bg-white rounded-tr-3xl px-6 py-8 flex flex-col gap-4 h-full">
-              <div className="py-4">
-                <p className="mb-2 first-letter:uppercase">
+            <div className="bg-white rounded-tr-3xl px-6 py-6 flex flex-col gap-4 h-full">
+              {/* <div className="">
+                <p className="text-sm mb-2 first-letter:uppercase">
                   {authMode} with just one step
                 </p>
                 <div className="social-media-container flex justify-start gap-3">
@@ -65,9 +65,9 @@ const LoginRegisterPage = ({ authMode, setAuthMode }) => {
                     className="social-media-icon"
                   />
                 </div>
-              </div>
-              <div className="flex flex-col gap-6">
-                <p>Or {authMode} with E-mail</p>
+              </div> */}
+              <div className="flex flex-col gap-4">
+                {/* <p className="text-sm">Or {authMode} with E-mail</p> */}
                 <form action="" className="login-form flex flex-col gap-4">
                   {(authMode === "login" && <Login />) ||
                     (authMode === "register" && <Register />)}

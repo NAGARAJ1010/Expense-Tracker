@@ -10,7 +10,6 @@ const Register = () => {
     const [inputValue, setInputValue] = useState('');
     const passwordHandler = (e) => {
         setInputValue(e.target.value);
-        setShowPassword(inputValue.trim() !== '' ? 'block' : 'hidden');
   }
   return (
     <>
@@ -24,11 +23,15 @@ const Register = () => {
       </div>
       <div className="form-input-container register">
         <label htmlFor="password">Password</label>
-        <div className="relative">
+        <div
+          className="relative"
+          onFocus={() => setShowPassword("block")}
+          onBlur={() => setShowPassword("hidden")}
+          tabIndex={-1}
+        >
           <input
             type={`${togglePasswordIcon ? "text" : "password"}`}
             id="password"
-            onClick={() => setShowPassword("block")}
             onChange={(event) => passwordHandler(event)}
           />
           <div
@@ -43,7 +46,12 @@ const Register = () => {
       </div>
       <div className="form-input-container register">
         <label htmlFor="confirm-password">Confirm password</label>
-        <div className="relative">
+        <div
+          className="relative"
+          onFocus={() => setShowConPassword("block")}
+          onBlur={() => setShowConPassword("hidden")}
+          tabIndex={-1}
+        >
           <input
             type={`${toggleConPasswordIcon ? "text" : "password"}`}
             id="confirm-password"
