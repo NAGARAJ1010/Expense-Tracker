@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import loginImage from "../assets/11669054_20943670.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewUser } from "../api/registerService";
+import { addNewUser, loginUser } from "../api/registerService";
 import { useState } from "react";
+import { resetRegister } from "../redux/registerSlice";
 
 
 const LoginRegisterPage = ({ authMode, setAuthMode }) => {
+  const [response, setResponse] = useState('');
   const[isMatch, setIsMatch] = useState({
       fullName : '',
       email : '',
@@ -33,17 +35,25 @@ const LoginRegisterPage = ({ authMode, setAuthMode }) => {
         confirmPassword == '',
         confirmPassword !== '' && password !== '' && confirmPassword !== password,
       ],
+      success : response?.data?.success || '',
     });
-    console.log(isMatch);
   }
 
   const handleSubmit = async (e)=>{
     handleValidation();
-    if(true){
-      return;
-    }
     try{
-      result = addNewUser({fullName, email, password});
+      if(authMode == 'register'){
+        let result = await addNewUser({fullName, email, password});
+        setResponse(result);
+        dispatch(resetRegister());
+      } else if( authMode == 'login'){
+        let result = await loginUser({email, password});
+        setResponse(result);
+        setIsMatch(prev => ({...prev, success: response?.data?.success}));
+        if(isMatch.success){
+          navigate('/dashboard');
+        }
+      }
     }catch(err){
       console.log(err);
     }
