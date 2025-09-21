@@ -11,8 +11,9 @@ import { resetRegister } from "../redux/registerSlice";
 import SuccessMsg from "../components/SuccessMsg";
 
 
-const LoginRegisterPage = ({ authMode, setAuthMode }) => {
+const LoginRegisterPage = ({ authMode, setAuthMode, success }) => {
   const [response, setResponse] = useState('');
+  const [showSuccess, setShowSuccess] = useState('');
   const[isMatch, setIsMatch] = useState({
       fullName : '',
       email : '',
@@ -36,7 +37,6 @@ const LoginRegisterPage = ({ authMode, setAuthMode }) => {
         confirmPassword == '',
         confirmPassword !== '' && password !== '' && confirmPassword !== password,
       ],
-      success : response?.data?.success || '',
     });
   }
 
@@ -46,13 +46,17 @@ const LoginRegisterPage = ({ authMode, setAuthMode }) => {
       if(authMode == 'register'){
         let result = await addNewUser({fullName, email, password});
         setResponse(result);
-        dispatch(resetRegister());
+        if(response?.data?.success){
+          navigate('/register/success');
+          setAuthMode('login');
+          dispatch(resetRegister());
+        }
       } else if( authMode == 'login'){
         let result = await loginUser({email, password});
         setResponse(result);
-        setIsMatch(prev => ({...prev, success: response?.data?.success}));
-        if(isMatch.success){
+        if(response?.data?.success){
           navigate('/dashboard');
+          dispatch(resetRegister());
         }
       }
     }catch(err){
@@ -70,7 +74,7 @@ const LoginRegisterPage = ({ authMode, setAuthMode }) => {
           </div>
         </section>
         {
-          !response?.data?.success && 
+          !success &&
           <section className="lg:w-1/2 flex flex-col items-center lg:rounded-3xl overflow-hidden h-screen lg:h-auto shadow-lg border-(--primary-color) ">
           <div className="bg-white w-full">
             <div className="text-white bg-(--primary-color) rounded-bl-3xl px-6 py-8 flex justify-between">
@@ -128,8 +132,8 @@ const LoginRegisterPage = ({ authMode, setAuthMode }) => {
         </section>
         }
         {
-          response?.data?.success && authMode == 'register' &&
-          <section className="lg:w-1/2 flex flex-col items-center lg:rounded-3xl overflow-hidden h-screen lg:h-auto shadow-lg border-(--primary-color) ">
+          success &&
+          <section className="lg:w-1/2 flex flex-col items-center lg:rounded-3xl overflow-hidden h-screen lg:h-auto shadow-lg border-(--primary-color)">
             <SuccessMsg />
           </section>
         }
