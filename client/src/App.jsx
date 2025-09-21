@@ -11,6 +11,7 @@ import LoginRegisterPage from "./pages/LoginRegisterPage";
 import NotFound from "./pages/NotFound";
 import { useState } from "react";
 import DashBoardPage from "./pages/DashBoardPage";
+import SuccessMsg from "./components/SuccessMsg";
 function App() {
   const [authMode, setAuthMode] = useState('login');
   const router = createBrowserRouter(
