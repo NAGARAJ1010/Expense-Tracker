@@ -1,21 +1,53 @@
 import Login from "../components/Login";
+import axios from 'axios';
 import Register from "../components/Register";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGoogle,
-  faFacebookF,
-  faXTwitter,
-} from "@fortawesome/free-brands-svg-icons";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import loginImage from "../assets/11669054_20943670.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewUser } from "../api/registerService";
+import { useState } from "react";
+
 
 const LoginRegisterPage = ({ authMode, setAuthMode }) => {
+  const[isMatch, setIsMatch] = useState({
+      fullName : '',
+      email : '',
+      password : '',
+      confirmPassword : [],
+    });
   const navigate = useNavigate();
   const navigateTo = (mode) => {
     setAuthMode(mode);
     navigate(`/${mode}`);
   };
+  const {fullName, email, password, confirmPassword} = useSelector(state => state.register);
+  const dispatch = useDispatch();
+
+  const handleValidation = ()=>{
+    setIsMatch({
+      fullName : fullName == '',
+      email : email == '',
+      password : password == '',
+      confirmPassword : [
+        confirmPassword == '',
+        confirmPassword !== '' && password !== '' && confirmPassword !== password,
+      ],
+    });
+    console.log(isMatch);
+  }
+
+  const handleSubmit = async (e)=>{
+    handleValidation();
+    if(true){
+      return;
+    }
+    try{
+      result = addNewUser({fullName, email, password});
+    }catch(err){
+      console.log(err);
+    }
+  }
   return (
     <section className="login-register-container bg-(--primary-color) lg:bg-white lg:flex lg:rounded-3xl lg:p-6 max-w-[60rem] h-screen mx-auto">
       <div className="lg:bg-white lg:flex lg:rounded-3xl bg-red-500 w-full">
@@ -47,32 +79,12 @@ const LoginRegisterPage = ({ authMode, setAuthMode }) => {
           </div>
           <div className="form-section-container bg-(--primary-color) flex-1">
             <div className="bg-white rounded-tr-3xl px-6 py-6 flex flex-col gap-4 h-full">
-              {/* <div className="">
-                <p className="text-sm mb-2 first-letter:uppercase">
-                  {authMode} with just one step
-                </p>
-                <div className="social-media-container flex justify-start gap-3">
-                  <FontAwesomeIcon
-                    icon={faGoogle}
-                    className="social-media-icon"
-                  />
-                  <FontAwesomeIcon
-                    icon={faFacebookF}
-                    className="social-media-icon"
-                  />
-                  <FontAwesomeIcon
-                    icon={faXTwitter}
-                    className="social-media-icon"
-                  />
-                </div>
-              </div> */}
               <div className="flex flex-col gap-4">
-                {/* <p className="text-sm">Or {authMode} with E-mail</p> */}
                 <form action="" className="login-form flex flex-col gap-4">
                   {(authMode === "login" && <Login />) ||
-                    (authMode === "register" && <Register />)}
+                    (authMode === "register" && <Register isMatch={isMatch} />)}
                 </form>
-                <button onClick={(e)=>e.target.innerText == 'SIGN IN' ? navigate("/dashboard") : console.log(e.target.innerText)} className="cursor-pointer uppercase text-md text-white bg-(--primary-color) tracking-wider font-medium py-3 w-full rounded-xl border-2 hover:border-(--primary-color) hover:bg-white hover:text-(--primary-color) transition-colors duration-300">
+                <button onClick={handleSubmit} className="cursor-pointer uppercase text-md text-white bg-(--primary-color) tracking-wider font-medium py-3 w-full rounded-xl border-2 hover:border-(--primary-color) hover:bg-white hover:text-(--primary-color) transition-colors duration-300">
                   {authMode == "login" ? "Sign In" : "Sign Up"}
                 </button>
                 {authMode != "login" && (
