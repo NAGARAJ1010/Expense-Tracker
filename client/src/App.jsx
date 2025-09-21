@@ -20,6 +20,7 @@ function App() {
         <Route index element={<LoginOptionPage setAuthMode={setAuthMode}/>} />
         <Route path="login" element={<LoginRegisterPage authMode={ authMode } setAuthMode={setAuthMode}/>} />
         <Route path="register" element={<LoginRegisterPage authMode={authMode} setAuthMode={setAuthMode} />} />
+        <Route path="register/success" element={<LoginRegisterPage success={true} />} />
         <Route path="dashboard" element={ <DashBoardPage /> } />
         <Route path="*" element={ <NotFound /> } />
       </Route>
