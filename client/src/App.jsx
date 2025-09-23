@@ -11,6 +11,7 @@ import LoginRegisterPage from "./pages/LoginRegisterPage";
 import NotFound from "./pages/NotFound";
 import { useState } from "react";
 import DashBoardPage from "./pages/DashBoardPage";
+import TransactionPage from "./pages/TransactionPage";
 function App() {
   const [authMode, setAuthMode] = useState('login');
   const router = createBrowserRouter(
@@ -27,7 +28,8 @@ function App() {
   );
   return (
     <>
-      <RouterProvider router={router}></RouterProvider>
+      {/* <RouterProvider router={router}></RouterProvider> */}
+      <TransactionPage/>
     </>
   );
 }

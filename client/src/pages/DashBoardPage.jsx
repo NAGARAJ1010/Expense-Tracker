@@ -1,4 +1,3 @@
-import React from "react";
 import ExpenseCard from "../components/ExpenseCard";
 import StatCard from "../components/StatCard";
 import Menu from "../components/Menu";

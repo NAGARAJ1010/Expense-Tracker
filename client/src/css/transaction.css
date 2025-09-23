@@ -1,0 +1,20 @@
+@import "tailwindcss";
+.type-container::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    border-radius: 2rem;
+    background-color: var(--primary-color);
+    transition: all ease-in 0.3s;
+    z-index: -1;
+}
+
+.toggle::before{
+    left: 50%;
+}
+.type-container div{
+    @apply text-center capitalize py-3 w-50 tracking-wider rounded-4xl transition-colors duration-300;
+}
