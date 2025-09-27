@@ -12,9 +12,12 @@ import { faArrowLeft, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CategoryIcon from '../components/CategoryIcon';
 import {gsap} from 'gsap';
+import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
+import { useNavigate } from 'react-router-dom';
 const TransactionPage = ()=>{
     const categories = ['food','shopping','entertainment','medical','travel','investment','others'];
     const[selectedType , setSelectedType] = useState('expense');
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const {category} = useSelector(state => state.transaction);
 
@@ -30,8 +33,8 @@ const TransactionPage = ()=>{
         dispatch(setTransactionField({field: name.nodeValue, value: selectedType}));
     };
     return (
-      <div className="transaction-container px-4 py-8 flex flex-col gap-5 lg:gap-8 max-w-[80rem] m-auto">
-        <div className='transaction__heading flex gap-2 items-center'>
+      <div className="transaction-container overflow-y-scroll relative px-4 pt-8 pb-20 flex flex-col gap-5 lg:gap-8 max-w-[80rem] m-auto">
+        <div className='transaction__heading flex gap-2 items-center' onClick={()=>navigate('/dashboard')}>
           <div className='w-6 h-6'>
             <FontAwesomeIcon icon={faArrowLeft} className='w-full h-full'/>
           </div>
@@ -106,6 +109,9 @@ const TransactionPage = ()=>{
               </div>
             </div>
           </div>
+        </div>
+        <div className={`fixed bottom-4 left-5/12 z-10 w-20 h-20 bg-(--primary-color) rounded-full p-4 shadow-md shadow-gray-600`}>
+          <FontAwesomeIcon icon={faFloppyDisk} className='turn-white'/>
         </div>
       </div>
     );

@@ -22,14 +22,14 @@ function App() {
         <Route path="register" element={<LoginRegisterPage authMode={authMode} setAuthMode={setAuthMode} />} />
         <Route path="register/success" element={<LoginRegisterPage success={true} />} />
         <Route path="dashboard" element={ <DashBoardPage /> } />
+        <Route path="transaction" element={ <TransactionPage /> } />
         <Route path="*" element={ <NotFound /> } />
       </Route>
     )
   );
   return (
     <>
-      {/* <RouterProvider router={router}></RouterProvider> */}
-      <TransactionPage/>
+      <RouterProvider router={router}></RouterProvider>
     </>
   );
 }

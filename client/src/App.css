@@ -12,6 +12,8 @@
   --input-value-color: #1d1d1f;
   --subtle-black-color: #1e272e;
   --danger-color: #ff3f34;
+  --spend-color: #e75a5b;
+  --income-color: #4cbe9f;
 }
 body {
   margin: 0;
@@ -55,4 +57,14 @@ input:-webkit-autofill {
 
 .primary-btn{
   @apply cursor-pointer uppercase text-white bg-(--primary-color) tracking-wider font-medium py-3 w-full rounded-xl border-2 hover:border-(--primary-color) hover:bg-white hover:text-(--primary-color) transition-colors duration-300;
+}
+
+.expense-card-container{
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+/* Stats card component css*/
+.fa-circle-up, .fa-circle-down, .fa-floppy-disk{
+  width: 100%;
+  height: 100%;
 }

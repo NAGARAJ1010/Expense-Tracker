@@ -8,7 +8,7 @@ import InvestmentIcon from "../assets/investment.svg";
 import OthersIcon from "../assets/others.svg";
 import { useSelector } from 'react-redux';
 
-const CategoryIcon = ({ categoryName = "foodDinning", type = "icon", handleCategory }) => {
+const CategoryIcon = ({ categoryName = "food", type = "icon", handleCategory }) => {
   const categoryImg = {
     food: {
       color: "#ff922b",
@@ -61,13 +61,13 @@ const CategoryIcon = ({ categoryName = "foodDinning", type = "icon", handleCateg
             className="w-full h-full turn-white"
             style={{
               filter:
-                "invert(1) brightness(1) drop-shadow(2px 2px 4px rgba(0,0,0,0.5))",
+                "invert(1) brightness(1)",
             }}
           />
         </div>
       )}
       {type == "card" && (
-        <div className={`category ${category === '' || category === categoryName ? 'shadow-2xl' : 'unselected-options'} ${categoryImg[categoryName]?.bgColor}`} onClick={()=>handleCategory('category', categoryName)} >
+        <div className={`category ${category === '' ? '' : category === categoryName ? 'shadow-2xl' : 'unselected-options'} ${categoryImg[categoryName]?.bgColor}`} onClick={()=>handleCategory('category', categoryName)} >
           <div className={`w-12 h-12 category-img`}>
             <img
               src={categoryImg[categoryName]?.img}
