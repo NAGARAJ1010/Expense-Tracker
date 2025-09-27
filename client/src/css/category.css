@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+.category-container .category{
+  @apply flex flex-col gap-2 items-center p-4 transition-all duration-300;
+  border-radius: 0.5rem;
+}
+
+.category-container .category .category-img{
+    @apply flex justify-center items-center select-none;
+}
+
+.category-container .category .category-title{
+  @apply text-center text-white tracking-wide capitalize text-sm select-none;
+}
+
+.unselected-options{
+    position: relative;
+}
+.unselected-options::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255, 0.6);
+    z-index: 1;
+}

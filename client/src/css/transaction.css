@@ -10,11 +10,44 @@
     background-color: var(--primary-color);
     transition: all ease-in 0.3s;
     z-index: -1;
+    @apply shadow-2xl;
 }
 
 .toggle::before{
     left: 50%;
 }
 .type-container div{
-    @apply text-center capitalize py-3 w-50 tracking-wider rounded-4xl transition-colors duration-300;
+    @apply text-center capitalize py-3 w-1/2 tracking-wider rounded-4xl transition-colors duration-300;
+}
+
+.input-heading{
+  @apply capitalize select-none text-lg
+}
+
+.fa-indian-rupee-sign, .fa-arrow-left{
+  width: 100%;
+  height: 100%;
+}
+
+.MuiButtonBase-root {
+  color: var(--primary-color) !important;
+}
+
+/* Unset the input borders of date and time */
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl fieldset{
+  border: unset;
+}
+/* Unset padding on date and time icons */
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl .MuiInputAdornment-root button{
+  padding: unset;
+  margin-right: 10px;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl input{
+  padding-block: 0.5rem;
+  padding-inline: unset;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl{
+  padding-inline-end: 0.25rem;
 }

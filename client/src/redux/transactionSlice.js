@@ -7,7 +7,7 @@ const initialState = {
     amount: '',
     category: '',
     notes: '',
-    tags: ''
+    tags: []
 }
 
 const transactionSlice = createSlice({

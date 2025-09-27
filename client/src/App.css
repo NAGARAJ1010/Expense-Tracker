@@ -4,6 +4,8 @@
 :root {
   --primary-font: "Raleway", sans-serif;
   --primary-color: #444cb1;
+  --secondary-color: #00a177;
+  --contrast-color:#474554;
   --gray-color: #dcdde1;
   --input-bg-color: #f6f6f6;
   --input-text-color: #616161;
@@ -14,7 +16,6 @@
 body {
   margin: 0;
   padding: 0;
-  width: 100vw;
   height: 100vh;
   box-sizing: border-box;
   font-family: var(--primary-font);
@@ -33,6 +34,7 @@ input:-webkit-autofill {
   box-shadow: 0 0 0px 1000px var(--input-bg-color) inset !important;
   -webkit-box-shadow: 0 0 0px 1000px var(--input-bg-color) inset !important;
   -webkit-text-fill-color: var(--input-value-color) !important;
+  color: var(--input-value-color);
 }
 
 .menu-option{
