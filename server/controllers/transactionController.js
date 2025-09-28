@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken");
 const transactionModel = require("../models/transactionModel");
 
 exports.addTransaction = async (req, res, next) => {
@@ -21,13 +20,23 @@ exports.addTransaction = async (req, res, next) => {
   }
 };
 
-exports.getTransaction = async (res, req, next) => {
+exports.getTransaction = async (req, res, next) => {
+  const transactionId = req.params.id;
   try {
-    const transactions = await transactionModel.find({ user: req.userId });
-    res.status(201).json({
-      success: true,
-      data: transactions,
-    });
+    if(transactionId){
+      const transaction = await transactionModel.findOne({_id: transactionId});
+      res.status(201).json({
+        success: true,
+        data: transaction
+      });
+    }
+    else {
+      const transactions = await transactionModel.find({ user: req.userId });
+      res.status(201).json({
+        success: true,
+        data: transactions,
+      });
+    }
   } catch (err) {
     res.status(401).json({
       success: false,
@@ -38,11 +47,10 @@ exports.getTransaction = async (res, req, next) => {
 
 exports.updateTransaction = async (req, res, next) => {
   try {
-    const { transactionId } = req.body;
+    const id = req.params.id;
     const existingTransaction = await transactionModel.findOneAndUpdate(
-      { _id: transactionId },
-      ...req.body,
-      { user: req.userId }
+      { _id: id, user: req.userId },
+      req.body
     );
     if (!existingTransaction) {
       return res.status(404).json({
