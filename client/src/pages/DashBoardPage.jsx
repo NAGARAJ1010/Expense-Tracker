@@ -3,8 +3,41 @@ import StatCard from "../components/StatCard";
 import Menu from "../components/Menu";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
+import { getTransactionById, getTransactions } from "../api/transactionService";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const DashBoardPage = () => {
+  const [transactions, setTransactions] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(async ()=>{
+    const result  = await getTransactions();
+    setTransactions(result.data);
+    console.log(result.data);
+  },[]);
+
+  const viewTransaction = async (transactionId)=>{
+    try {
+      const selectedData = await getTransactionById(transactionId);
+      if(selectedData){
+        dispatch(setTransactions({
+        transactionType : selectedData.transactionType,
+        date: selectedData.data,
+        time : selectedData.time,
+        amount : selectedData.time,
+        notes : selectedData.notes,
+        tags : selectedData.tags
+        }));
+        navigate(`/transaction/${transactionId}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="dashboard flex flex-col gap-4 items-center relative h-full max-w-[80rem] mx-auto">
       <div className="w-full text-start bg-(--primary-color) p-4 text-white">
@@ -30,18 +63,11 @@ const DashBoardPage = () => {
             <p className="text-end">Show All
               <FontAwesomeIcon icon={faArrowRight} className='w-5 ml-2'/>
             </p>
-            <ExpenseCard />
-            <ExpenseCard />
-            <ExpenseCard />
-            <ExpenseCard />
-            <ExpenseCard />
-            <ExpenseCard />
-            <ExpenseCard />
-            <ExpenseCard />
-            <ExpenseCard />
-            <ExpenseCard />
-            <ExpenseCard />
-            <ExpenseCard />
+            {
+              transactions && transactions.map((data, index)=>{
+                <ExpenseCard key={index} data={data} viewTransaction={viewTransaction}/>
+              })
+            }
           </div>
         </div>
       </div>

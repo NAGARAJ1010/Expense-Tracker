@@ -23,6 +23,7 @@ function App() {
         <Route path="register/success" element={<LoginRegisterPage success={true} />} />
         <Route path="dashboard" element={ <DashBoardPage /> } />
         <Route path="transaction" element={ <TransactionPage /> } />
+        <Route path="transaction/:id" element={ <TransactionPage /> } />
         <Route path="*" element={ <NotFound /> } />
       </Route>
     )

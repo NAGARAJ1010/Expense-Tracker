@@ -12,8 +12,8 @@ export const getTransactions= async()=>{
     return result;
 }
 
-export const getTransactionById = async(userId)=>{
-    const result = await api.get(`/transaction/getTransaction/${userId}`);
+export const getTransactionById = async(transactionId)=>{
+    const result = await api.get(`/transaction/getTransaction/${transactionId}`);
     return result;
 }
 
