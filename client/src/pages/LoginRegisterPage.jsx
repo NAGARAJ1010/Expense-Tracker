@@ -54,6 +54,8 @@ const LoginRegisterPage = ({ authMode, setAuthMode, success }) => {
       } else if( authMode == 'login'){
         let result = await loginUser({email, password});
         setResponse(result);
+        console.log(result);
+        localStorage.setItem("token", result.data.token);
         if(response?.data?.success){
           navigate('/dashboard');
           dispatch(resetRegister());
