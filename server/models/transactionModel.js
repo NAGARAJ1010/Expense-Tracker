@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema(
     {
-    transaction_type: {
+    transactionType: {
       type: String,
       required: true,
       trim: true,
@@ -29,7 +29,7 @@ const transactionSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    tag: {
+    tags: {
       type: [String],
       default: [],
     },
