@@ -51,3 +51,16 @@
 .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl{
   padding-inline-end: 0.25rem;
 }
+
+/* color of datepicker and timepicker changed */
+.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin,
+.MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiMenuItem-root{
+  color: var(--primary-color);
+}
+
+.MuiButtonBase-root.MuiPickersDay-root.Mui-selected,
+.MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.Mui-selected.MuiMenuItem-root{
+  background-color: var(--primary-color);
+  color: var(--color-white) !important;
+}
+

@@ -7,30 +7,38 @@ import { useEffect, useState } from "react";
 import { getTransactionById, getTransactions } from "../api/transactionService";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setTransactionField } from "../redux/transactionSlice";
 
 const DashBoardPage = () => {
   const [transactions, setTransactions] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(async ()=>{
-    const result  = await getTransactions();
-    setTransactions(result.data);
-    console.log(result.data);
-  },[]);
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const result = await getTransactions();
+        setTransactions(result?.data.transactions);
+      } catch (err) {
+        console.error("Error fetching transactions:", err);
+      }
+    };
 
+    fetchTransactions();
+  }, []);
+
+  const handleTransaction = (field, value)=>{
+    dispatch(setTransactionField({field, value}));
+  }
   const viewTransaction = async (transactionId)=>{
     try {
-      const selectedData = await getTransactionById(transactionId);
+      const fields = ['transactionType','category','date','time','amount','notes','tags'];
+      const result = await getTransactionById(transactionId);
+      const selectedData = result?.transaction;
       if(selectedData){
-        dispatch(setTransactions({
-        transactionType : selectedData.transactionType,
-        date: selectedData.data,
-        time : selectedData.time,
-        amount : selectedData.time,
-        notes : selectedData.notes,
-        tags : selectedData.tags
-        }));
+        fields.forEach((field)=>{
+          handleTransaction(field, selectedData[field]);
+        })
         navigate(`/transaction/${transactionId}`);
       }
     } catch (error) {
@@ -39,7 +47,7 @@ const DashBoardPage = () => {
   }
 
   return (
-    <div className="dashboard flex flex-col gap-4 items-center relative h-full max-w-[80rem] mx-auto">
+    <div className="dashboard flex flex-col gap-4 items-center relative h-full max-w-[60rem] mx-auto">
       <div className="w-full text-start bg-(--primary-color) p-4 text-white">
         <p className="">Good Morning,</p>
         <p className="text-2xl capitalize">Nagaraj Ganesan</p>
@@ -64,8 +72,10 @@ const DashBoardPage = () => {
               <FontAwesomeIcon icon={faArrowRight} className='w-5 ml-2'/>
             </p>
             {
-              transactions && transactions.map((data, index)=>{
-                <ExpenseCard key={index} data={data} viewTransaction={viewTransaction}/>
+              transactions.length > 0 && transactions.map((data, index)=>{
+                return(
+                  <ExpenseCard key={index} data={data} viewTransaction={viewTransaction}/>
+                )
               })
             }
           </div>

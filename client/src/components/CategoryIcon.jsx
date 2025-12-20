@@ -8,7 +8,7 @@ import InvestmentIcon from "../assets/investment.svg";
 import OthersIcon from "../assets/others.svg";
 import { useSelector } from 'react-redux';
 
-const CategoryIcon = ({ categoryName = "food", type = "icon", handleCategory }) => {
+const CategoryIcon = ({ categoryName = category, type = "icon", handleCategory }) => {
   const categoryImg = {
     food: {
       color: "#ff922b",

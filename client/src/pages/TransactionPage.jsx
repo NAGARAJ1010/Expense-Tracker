@@ -2,13 +2,13 @@ import * as React from 'react';
 import '../css/transaction.css';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setTransactionField } from '../redux/transactionSlice';
+import { resetTransactionField, setTransactionField } from '../redux/transactionSlice';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { TimePicker } from '@mui/x-date-pickers';
-import { faArrowLeft, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faIndianRupeeSign, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CategoryIcon from '../components/CategoryIcon';
 import {gsap} from 'gsap';
@@ -22,13 +22,20 @@ const TransactionPage = ()=>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {id} = useParams();
-    const {transactionType, date, time, amount, notes, tags} = useSelector(state => state.transaction);
+    const {transactionType, date, time,category, amount, notes, tags} = useSelector(state => state.transaction);
 
     useEffect(()=>{
       if(transactionType){
         setSelectedType(transactionType);
-        const typeContainer = document.querySelector('.type-container');
-        typeContainer.classList.toggle('toggle');
+        if(transactionType == 'income'){
+          const typeContainer = document.querySelector('.type-container');
+          typeContainer.classList.add('toggle');
+        }
+        handleTransactionData('transactionType', selectedType);
+      }
+
+      if(tags){
+        setInputTag(tags);
       }
     },[])
 
@@ -57,19 +64,34 @@ const TransactionPage = ()=>{
         handleTransactionData(name.nodeValue, selectedType);
     };
 
+    const formattedDate = (date)=>dayjs(date).format('YYYY-MM-DD');
+    const formattedTime = (time)=>dayjs(time).format('hh:mm A');
+
     const handleSubmit = async()=>{
       try {
-        if(id){
-          const result = await updateTransaction(
-            { transactionType, date, time, amount, category, notes, tags }
-          )
+        if (id) {
+          const result = await updateTransaction(id, {
+            transactionType,
+            date : formattedDate(date),
+            time : formattedTime(time),
+            amount,
+            category,
+            notes,
+            tags : inputTag,
+          });
+        } else {
+          const result = await addTransaction({
+            transactionType,
+            date : formattedDate(date),
+            time : formattedTime(time),
+            amount,
+            category,
+            notes,
+            tags : inputTag,
+          });
         }
-        else {
-          const result = await addTransaction(
-            { transactionType, date, time, amount, category, notes, tags }
-          )
-        }
-        console.log(result);
+        dispatch(resetTransactionField());
+        navigate('/dashboard');
       } catch (error) {
         console.log(error);
       }
@@ -107,13 +129,13 @@ const TransactionPage = ()=>{
             <p className='input-heading'>time & date</p>
             <div className='date-time-container flex justify-between gap-2 lg:items-end'>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker name='date' defaultValue={date ? date : dayjs()} onChange={(newDate)=> handleTransactionData('date', newDate ? newDate.format("DD-MM-YYYY") : date.format("DD-MM-YYYY"))}/>
-                <TimePicker name='time' defaultValue={date ? date : dayjs()} onChange={(newTime)=>handleTransactionData('time', newTime ? newTime.format("hh:mm A") : time.format("hh:mm A"))}/>
+                <DatePicker name='date' value={date ? dayjs(date) : null} format='DD-MM-YYYY' onChange={(newDate)=> handleTransactionData('date', newDate)}/>
+                <TimePicker name='time' value={time ? dayjs(time, 'hh:mm A') : null} format='hh:mm A' onChange={(newTime)=>handleTransactionData('time', newTime)}/>
               </LocalizationProvider>
             </div>
           </div>
           <div className='amount-wrapper flex items-end justify-between w-full lg:w-1/2'>
-            <div className='amount-container'>
+            <div className='amount-container w-full'>
               <label htmlFor="amount" className='block input-heading'>amount</label>
               <input type="number" value={amount} placeholder='0' id='amount' className='outline-0 text-3xl w-full placeholder:text-(--input-value-color) placeholder:opacity-70' onChange={(e)=>handleTransactionData('amount', e.target.value)}/>
             </div>
@@ -150,25 +172,25 @@ const TransactionPage = ()=>{
                 {
                   inputTag.map((tag, index)=>{
                       return (
-                        <p
+                        <div
                           key={index}
-                          className="p-1 rounded-md bg-(--contrast-color) text-sm text-white text-center align-middle tracking-wider flex items-center"
+                          className="py-1 px-2 rounded-md bg-(--contrast-color) text-sm text-white text-center align-middle tracking-wider flex items-center"
                         >
                           <span>#</span>
                           {tag}
-                          <span
+                          <div
                             data-index={index}
-                            className="ml-2 mr-1"
+                            className="ml-2 text-xs"
                             onClick={(e) => {
-                              const idx = Number(e.target.dataset.index);
+                              const idx = Number(e.currentTarget.dataset.index);
                               setInputTag((prev) =>
                                 prev.filter((_, i) => i !== idx)
                               );
                             }}
                           >
-                            X
-                          </span>
-                        </p>
+                            <FontAwesomeIcon icon={faXmark} />
+                          </div>
+                        </div>
                       );
                   })
                 }
