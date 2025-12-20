@@ -27,14 +27,14 @@ exports.getTransaction = async (req, res, next) => {
       const transaction = await transactionModel.findOne({_id: transactionId});
       res.status(201).json({
         success: true,
-        data: transaction
+        transaction
       });
     }
     else {
       const transactions = await transactionModel.find({ user: req.userId });
       res.status(201).json({
         success: true,
-        data: transactions,
+        transactions,
       });
     }
   } catch (err) {

@@ -4,19 +4,19 @@ const { signInValidation } = require("../middlewares/validator");
 const userModel = require("../models/userModel");
 const { doHash, doHashValidation } = require("../utils/hashing");
 
-exports.signUp = async(req, res, next)=>{
-    const {fullName, email, password, confirmPassword} = req.body;
+exports.signUp = async (req, res, next) => {
+    const { fullName, email, password, confirmPassword } = req.body;
     try {
-        const{error, value} = signUpValidation.validate({email,password});
-        if(error){
+        const { error, value } = signUpValidation.validate({ email, password });
+        if (error) {
             return res.status(401).json({
                 success: false,
                 message: error.details[0].message
             })
         }
 
-        const isUserExist = await userModel.findOne({email});
-        if(isUserExist){
+        const isUserExist = await userModel.findOne({ email });
+        if (isUserExist) {
             return res.status(401).json({
                 success: false,
                 message: 'User already exist'
@@ -42,19 +42,23 @@ exports.signUp = async(req, res, next)=>{
     }
 }
 
-exports.signIn = async(req, res, next)=>{
-    const {email, password} = req.body;
+exports.signIn = async (req, res, next) => {
+    const { email, password } = req.body;
     try {
-        const {error, value} = signInValidation.validate({email, password});
-        if(error){
+        console.log(req.body);
+
+        const { error, value } = signInValidation.validate({ email, password });
+        if (error) {
             return res.status(401).json({
                 success: false,
                 message: error.details[0].message
             })
         }
 
-        const existingUser = await userModel.findOne({email}).select('+password');
-        if(!existingUser){
+        const existingUser = await userModel.findOne({ email }).select('+password');
+        console.log(existingUser);
+
+        if (!existingUser) {
             return res.status(401).json({
                 success: false,
                 message: 'User does not exist'
@@ -62,7 +66,7 @@ exports.signIn = async(req, res, next)=>{
         }
 
         const result = await doHashValidation(password, existingUser.password);
-        if(!result){
+        if (!result) {
             return res.status(401).json({
                 success: false,
                 message: 'Invalid credentials...'
@@ -73,19 +77,19 @@ exports.signIn = async(req, res, next)=>{
             userId: existingUser._id,
             email: existingUser.email,
             verified: existingUser.verified,
-        }, process.env.TOKEN_SECRET, {expiresIn: '8h'});
+        }, process.env.TOKEN_SECRET, { expiresIn: '8h' });
 
         res.cookie("Authorization", "Bearer" + token, {
-          expires: new Date(Date.now() + 8 * 3600000),
-          httpOnly: process.env.MODE_ENV === "development",
-          secure: process.env.MODE_ENV === "development",
+            expires: new Date(Date.now() + 8 * 3600000),
+            httpOnly: process.env.MODE_ENV === "development",
+            secure: process.env.MODE_ENV === "development",
         }).json({
-            success : true,
+            success: true,
             message: 'logged in successfully',
             token
         });
 
-        
+
     } catch (error) {
         console.log(error);
     }
