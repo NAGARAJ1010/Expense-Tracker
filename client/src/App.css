@@ -50,3 +50,7 @@ input:-webkit-autofill {
 .dashboard .menu-md-screen{
   @apply hidden;
 } 
+
+.primary-btn{
+  @apply cursor-pointer uppercase text-white bg-(--primary-color) tracking-wider font-medium py-3 w-full rounded-xl border-2 hover:border-(--primary-color) hover:bg-white hover:text-(--primary-color) transition-colors duration-300;
+}

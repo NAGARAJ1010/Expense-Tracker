@@ -22,3 +22,11 @@
 .login-btn {
   @apply uppercase py-3 block rounded-xl transition-colors duration-300 cursor-pointer w-full max-w-[20rem];
 }
+
+.error-msg{
+  @apply text-red-500 text-xs ml-4 mt-1;
+}
+
+.error{
+  @apply border border-red-500;
+}

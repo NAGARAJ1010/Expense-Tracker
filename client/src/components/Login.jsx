@@ -2,6 +2,8 @@ import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../css/login.css";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setRegisterField } from "../redux/registerSlice";
 const Login = () => {
   const [showPassword, setShowPassword] = useState("hidden");
   const [toggleIcon, setToggleIcon] = useState(false);
@@ -10,14 +12,21 @@ const Login = () => {
     
   }
 
+  const {email, password} = useSelector(store => store.register);
+  const dispatch = useDispatch();
   const toggleEyeIcon = () => {
     setToggleIcon(prev => !prev);
+  }
+
+  const handleChange = (e)=>{
+    const {name, value} = e.target;
+    dispatch(setRegisterField({field:name, value}));
   }
   return (
     <>
       <div className="form-input-container">
-        <label htmlFor="name">Full name</label>
-        <input type="text" id="name" />
+        <label htmlFor="email">Email</label>
+        <input type="text" id="email" name="email" value={email} onChange={handleChange}/>
       </div>
       <div
         className="form-input-container relative"
@@ -29,7 +38,9 @@ const Login = () => {
         <input
           type={`${toggleIcon ? "text" : "password"}`}
           id="password"
-          onChange={(e) => handlePassword(e)}
+          name="password"
+          value={password}
+          onChange={handleChange}
         />
         <div
           className={`eye-icon-container ${showPassword}`}
