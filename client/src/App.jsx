@@ -11,17 +11,33 @@ import LoginRegisterPage from "./pages/LoginRegisterPage";
 import NotFound from "./pages/NotFound";
 import { useState } from "react";
 import DashBoardPage from "./pages/DashBoardPage";
+import TransactionPage from "./pages/TransactionPage";
 function App() {
-  const [authMode, setAuthMode] = useState('login');
+  const [authMode, setAuthMode] = useState("login");
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
-        <Route index element={<LoginOptionPage setAuthMode={setAuthMode}/>} />
-        <Route path="login" element={<LoginRegisterPage authMode={ authMode } setAuthMode={setAuthMode}/>} />
-        <Route path="register" element={<LoginRegisterPage authMode={authMode} setAuthMode={setAuthMode} />} />
-        <Route path="register/success" element={<LoginRegisterPage success={true} />} />
-        <Route path="dashboard" element={ <DashBoardPage /> } />
-        <Route path="*" element={ <NotFound /> } />
+        <Route index element={<LoginOptionPage setAuthMode={setAuthMode} />} />
+        <Route
+          path="login"
+          element={
+            <LoginRegisterPage authMode={authMode} setAuthMode={setAuthMode} />
+          }
+        />
+        <Route
+          path="register"
+          element={
+            <LoginRegisterPage authMode={authMode} setAuthMode={setAuthMode} />
+          }
+        />
+        <Route
+          path="register/success"
+          element={<LoginRegisterPage success={true} />}
+        />
+        <Route path="dashboard" element={<DashBoardPage />} />
+        <Route path="transaction" element={<TransactionPage />} />
+        <Route path="transaction/:id" element={<TransactionPage />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     )
   );

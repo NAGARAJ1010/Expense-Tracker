@@ -1,23 +1,33 @@
 import CategoryIcon from "./CategoryIcon";
-import cash from '../assets/cash.svg';
+import incomeCash from '../assets/inc-cash.svg';
+import expenseCash from '../assets/exp-cash.svg';
+import dayjs from "dayjs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 const ExpenseCard = ({
-  price = "123.45",
-  detail = "Breakfast in hotel",
-  date = "15 May 25",
+  data,
+  viewTransaction
 }) => {
+  const isoDate = data.date;
+  const formattedDate = dayjs(isoDate).format('DD-MM-YYYY');
   return (
-    <div className="flex justify-between py-4 px-6 border border-(--primary-color) bg-[#e1e3fd] text-[#1E1E1E] rounded-xl">
+    <div className="expense-card-container flex justify-between py-4 px-6 bg-white border border-gray-100 rounded-xl cursor-pointer" onClick={()=>viewTransaction(data._id)}>
       <div className="flex gap-4 items-center">
-        <CategoryIcon />
+        <CategoryIcon categoryName={data.category} type="icon" />
         <div>
-          <p className="price-value text-xl">{price}</p>
-          <p className="expense-detail text-sm">{detail}</p>
+          <p className="price-value text-xl flex items-center">
+            <span className="flex w-4 h-4">
+              <FontAwesomeIcon icon={faIndianRupeeSign}/>
+            </span>
+            {data.amount}
+          </p>
+          <p className="expense-detail text-sm">{data.notes}</p>
         </div>
       </div>
       <div className="flex flex-col items-end justify-between">
-        <p className="text-sm">{date}</p>
+        <p className="text-sm">{formattedDate}</p>
         <div className="w-6 h-6">
-          <img src={cash} alt="" className="w-full h-full turn-white" />
+          <img src={`${data.transactionType === 'income' ? incomeCash : expenseCash}`} alt="" className="w-full h-full" />
         </div>
       </div>
     </div>
