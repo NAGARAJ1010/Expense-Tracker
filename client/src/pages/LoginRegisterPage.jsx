@@ -1,5 +1,4 @@
 import Login from "../components/Login";
-import axios from "axios";
 import Register from "../components/Register";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
@@ -12,7 +11,6 @@ import SuccessMsg from "../components/SuccessMsg";
 
 const LoginRegisterPage = ({ authMode, setAuthMode, success }) => {
   const [response, setResponse] = useState("");
-  const [showSuccess, setShowSuccess] = useState("");
   const [isMatch, setIsMatch] = useState({
     fullName: "",
     email: "",
@@ -43,8 +41,7 @@ const LoginRegisterPage = ({ authMode, setAuthMode, success }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    alert("sdf");
+  const handleSubmit = async () => {
     handleValidation();
     try {
       if (authMode == "register") {

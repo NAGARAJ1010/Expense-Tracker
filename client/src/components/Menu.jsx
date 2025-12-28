@@ -1,9 +1,9 @@
-import React from 'react'
-import home from '../assets/home.svg'
-import analyse from '../assets/analyse.svg'
-import accounts from '../assets/calendar.svg'
-import more from '../assets/others.svg'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import home from "../assets/home.svg";
+import analyse from "../assets/analyse.svg";
+import accounts from "../assets/calendar.svg";
+import more from "../assets/others.svg";
+import { useNavigate } from "react-router-dom";
 const Menu = () => {
   const navigate = useNavigate();
   return (
@@ -38,7 +38,10 @@ const Menu = () => {
             <img src={analyse} alt="" className="turn-white" />
           </div>
         </div>
-        <button onClick={()=> navigate('/transaction')} className="w-18 h-18 bg-white rounded-[100%] text-4xl text-(--primary-color) absolute -top-8 left-[42%] cursor-pointer">
+        <button
+          onClick={() => navigate("/transaction")}
+          className="w-18 h-18 bg-white rounded-[100%] text-4xl text-(--primary-color) absolute -top-8 left-[42%] cursor-pointer"
+        >
           +
         </button>
         <div className="flex justify-around w-1/3">
@@ -52,6 +55,6 @@ const Menu = () => {
       </div>
     </>
   );
-}
+};
 
-export default Menu
+export default Menu;

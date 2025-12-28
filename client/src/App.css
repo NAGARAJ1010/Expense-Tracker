@@ -5,7 +5,7 @@
   --primary-font: "Raleway", sans-serif;
   --primary-color: #444cb1;
   --secondary-color: #00a177;
-  --contrast-color:#474554;
+  --contrast-color: #474554;
   --gray-color: #dcdde1;
   --input-bg-color: #f6f6f6;
   --input-text-color: #616161;
@@ -24,12 +24,13 @@ body {
   color: var(--subtle-black-color);
 }
 
-#root, main {
+#root,
+main {
   height: 100vh;
   width: 100%;
 }
 
-.turn-white{
+.turn-white {
   @apply invert brightness-0;
 }
 input:-webkit-autofill {
@@ -39,32 +40,36 @@ input:-webkit-autofill {
   color: var(--input-value-color);
 }
 
-.menu-option{
+.menu-option {
   @apply w-13 cursor-pointer hover:bg-[#9c88ff] p-3 rounded-[100%] transition-all duration-300 flex gap-4 items-center;
 }
 
-.menu-option-name{
-  @apply capitalize text-white 
+.menu-option-name {
+  @apply capitalize text-white;
 }
 
-.menu button{
-  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
+.menu button {
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
 }
 
-.dashboard .menu-md-screen{
+.dashboard .menu-md-screen {
   @apply hidden;
-} 
+}
 
-.primary-btn{
+.primary-btn {
   @apply cursor-pointer uppercase text-white bg-(--primary-color) tracking-wider font-medium py-3 w-full rounded-xl border-2 hover:border-(--primary-color) hover:bg-white hover:text-(--primary-color) transition-colors duration-300;
 }
 
-.expense-card-container{
+.expense-card-container {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
 /* Stats card component css*/
-.fa-circle-up, .fa-circle-down, .fa-floppy-disk, .fa-indian-rupee-sign{
+.fa-circle-up,
+.fa-circle-down,
+.fa-floppy-disk,
+.fa-indian-rupee-sign,
+.fa-plus {
   width: 100%;
   height: 100%;
 }

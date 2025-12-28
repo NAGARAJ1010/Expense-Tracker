@@ -13,7 +13,9 @@ exports.addTransaction = async (req, res, next) => {
       message: "Transaction data sent successfully...",
     });
   } catch (err) {
-    res.status(401).json({
+    console.error("ADD TRANSACTION ERROR:", err);
+
+    res.status(400).json({
       success: false,
       message: err.message,
     });
@@ -23,14 +25,15 @@ exports.addTransaction = async (req, res, next) => {
 exports.getTransaction = async (req, res, next) => {
   const transactionId = req.params.id;
   try {
-    if(transactionId){
-      const transaction = await transactionModel.findOne({_id: transactionId});
+    if (transactionId) {
+      const transaction = await transactionModel.findOne({
+        _id: transactionId,
+      });
       res.status(201).json({
         success: true,
-        transaction
+        transaction,
       });
-    }
-    else {
+    } else {
       const transactions = await transactionModel.find({ user: req.userId });
       res.status(201).json({
         success: true,
