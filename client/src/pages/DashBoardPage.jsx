@@ -59,7 +59,6 @@ const DashBoardPage = () => {
       console.error("Error fetching transactions:", err);
     }
   };
-
   const handleTransaction = (field, value) => {
     dispatch(setTransactionField({ field, value }));
   };
@@ -109,11 +108,14 @@ const DashBoardPage = () => {
             </div>
           </div>
           <div className="flex flex-col gap-2 w-full mt-4">
-            <p className="text-end">
+            <p
+              className="text-end"
+              onClick={() => navigate("/filterTransactions")}
+            >
               Show All
               <FontAwesomeIcon icon={faArrowRight} className="w-5 ml-2" />
             </p>
-            {transactions?.length > 0 &&
+            {transactions.length > 0 &&
               transactions.map((data, index) => {
                 return (
                   <ExpenseCard
