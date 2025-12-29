@@ -27,24 +27,32 @@ const DashBoardPage = () => {
     fetchTransactions();
   }, []);
 
-  const handleTransaction = (field, value)=>{
-    dispatch(setTransactionField({field, value}));
-  }
-  const viewTransaction = async (transactionId)=>{
+  const handleTransaction = (field, value) => {
+    dispatch(setTransactionField({ field, value }));
+  };
+  const viewTransaction = async (transactionId) => {
     try {
-      const fields = ['transactionType','category','date','time','amount','notes','tags'];
+      const fields = [
+        "transactionType",
+        "category",
+        "date",
+        "time",
+        "amount",
+        "notes",
+        "tags",
+      ];
       const result = await getTransactionById(transactionId);
       const selectedData = result?.transaction;
-      if(selectedData){
-        fields.forEach((field)=>{
+      if (selectedData) {
+        fields.forEach((field) => {
           handleTransaction(field, selectedData[field]);
-        })
+        });
         navigate(`/transaction/${transactionId}`);
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className="dashboard flex flex-col gap-4 items-center relative h-full max-w-[60rem] mx-auto">
@@ -68,16 +76,23 @@ const DashBoardPage = () => {
             </div>
           </div>
           <div className="flex flex-col gap-2 w-full mt-4">
-            <p className="text-end">Show All
-              <FontAwesomeIcon icon={faArrowRight} className='w-5 ml-2'/>
+            <p
+              className="text-end"
+              onClick={() => navigate("/filterTransactions")}
+            >
+              Show All
+              <FontAwesomeIcon icon={faArrowRight} className="w-5 ml-2" />
             </p>
-            {
-              transactions.length > 0 && transactions.map((data, index)=>{
-                return(
-                  <ExpenseCard key={index} data={data} viewTransaction={viewTransaction}/>
-                )
-              })
-            }
+            {transactions.length > 0 &&
+              transactions.map((data, index) => {
+                return (
+                  <ExpenseCard
+                    key={index}
+                    data={data}
+                    viewTransaction={viewTransaction}
+                  />
+                );
+              })}
           </div>
         </div>
       </div>
