@@ -77,7 +77,7 @@ const TransactionPage = () => {
     setSelectedType(newType);
     const typeContainer = document.querySelector(".type-container");
     typeContainer.classList.toggle("toggle");
-    handleTransactionData(name.nodeValue, selectedType);
+    handleTransactionData(name.nodeValue, newType);
   };
 
   const formattedDate = (date) => dayjs(date).format("YYYY-MM-DD");
@@ -192,6 +192,35 @@ const TransactionPage = () => {
               icon={faIndianRupeeSign}
               className="text-(--primary-color)"
             />
+          </div>
+        </div>
+      </div>
+      <div className="category-notes-container flex flex-col lg:flex-row gap-5">
+        <div className="category-wrapper lg:w-1/2">
+          <p className="mb-2 input-heading">categories</p>
+          <div className="category-container grid grid-cols-3 md:grid-cols-4 gap-3">
+            {selectedType == "expense" &&
+              expCategories.map((category, index) => {
+                return (
+                  <CategoryIcon
+                    key={index}
+                    handleCategory={handleTransactionData}
+                    categoryName={category}
+                    type="card"
+                  />
+                );
+              })}
+            {selectedType == "income" &&
+              incomeCategories.map((category, index) => {
+                return (
+                  <CategoryIcon
+                    key={index}
+                    handleCategory={handleTransactionData}
+                    categoryName={category}
+                    type="card"
+                  />
+                );
+              })}
           </div>
         </div>
       </div>

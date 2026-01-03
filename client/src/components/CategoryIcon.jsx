@@ -5,6 +5,7 @@ import ShoppingIcon from "../assets/shopping.svg";
 import TravellingIcon from "../assets/travel.svg";
 import MedicalIcon from "../assets/medical.svg";
 import InvestmentIcon from "../assets/investment.svg";
+import SalaryIcon from "../assets/salary.svg";
 import OthersIcon from "../assets/others.svg";
 import { useSelector } from "react-redux";
 
@@ -43,6 +44,11 @@ const CategoryIcon = ({
       color: "#92c55e",
       bgColor: "bg-[#749e4b]",
       img: InvestmentIcon,
+    },
+    salary: {
+      color: "#92c55e",
+      bgColor: "bg-[#749e4b]",
+      img: SalaryIcon,
     },
     others: {
       color: "",
