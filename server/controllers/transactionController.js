@@ -31,7 +31,7 @@ exports.getTransaction = async (req, res, next) => {
       });
     }
     else {
-      const transactions = await transactionModel.find({ user: req.userId });
+      const transactions = (await transactionModel.find({ user: req.userId }).sort({ date: -1}));
       res.status(201).json({
         success: true,
         transactions,
