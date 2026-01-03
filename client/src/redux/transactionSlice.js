@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 
 const initialState = {
-  transactionType: "expense",
+  transactionType: "",
   date: dayjs(),
   time: dayjs(),
-  amount: 0,
+  amount: "",
   category: "",
   notes: "",
   tags: [],
