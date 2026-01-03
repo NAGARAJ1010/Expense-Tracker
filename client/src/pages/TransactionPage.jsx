@@ -15,14 +15,25 @@ import {gsap} from 'gsap';
 import { faFloppyDisk } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addTransaction, updateTransaction } from "../api/transactionService";
-const TransactionPage = ()=>{
-    const categories = ['food','shopping','entertainment','medical','travel','investment','others'];
-    const[selectedType , setSelectedType] = useState('expense');
-    const[inputTag,setInputTag] = useState([]);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const {id} = useParams();
-    const {transactionType, date, time,category, amount, notes, tags} = useSelector(state => state.transaction);
+const TransactionPage = () => {
+  const expCategories = [
+    "food",
+    "shopping",
+    "entertainment",
+    "medical",
+    "travel",
+    "investment",
+    "others",
+  ];
+
+  const incomeCategories = ["salary", "others"];
+  const [selectedType, setSelectedType] = useState("expense");
+  const [inputTag, setInputTag] = useState([]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { transactionType, date, time, category, amount, notes, tags } =
+    useSelector((state) => state.transaction);
 
     useEffect(()=>{
       if(transactionType){
@@ -31,7 +42,7 @@ const TransactionPage = ()=>{
           const typeContainer = document.querySelector('.type-container');
           typeContainer.classList.add('toggle');
         }
-        handleTransactionData('transactionType', selectedType);
+        handleTransactionData('transactionType', transactionType);
       }
 
       if(tags){
@@ -56,13 +67,14 @@ const TransactionPage = ()=>{
       }
     }
 
-    const handleToggle = (e) => {
-        const {name} = e.nativeEvent.target.attributes;
-        setSelectedType(prev => prev == 'expense' ? 'income' : 'expense');
-        const typeContainer = document.querySelector('.type-container');
-        typeContainer.classList.toggle('toggle');
-        handleTransactionData(name.nodeValue, selectedType);
-    };
+  const handleToggle = (e) => {
+    const { name } = e.nativeEvent.target.attributes;
+    const newType = selectedType === 'expense' ? 'income' : 'expense';
+    setSelectedType(newType);
+    const typeContainer = document.querySelector(".type-container");
+    typeContainer.classList.toggle("toggle");
+    handleTransactionData(name.nodeValue, newType);
+  };
 
     const formattedDate = (date)=>dayjs(date).format('YYYY-MM-DD');
     const formattedTime = (time)=>dayjs(time).format('hh:mm A');
@@ -97,6 +109,7 @@ const TransactionPage = ()=>{
       }
     }
     return (
+      <>
       <div className="transaction-container overflow-y-scroll relative px-4 pt-8 pb-20 flex flex-col gap-5 lg:gap-8 max-w-[80rem] m-auto">
         <div className='transaction__heading flex gap-2 items-center' onClick={()=>navigate('/dashboard')}>
           <div className='w-6 h-6'>
@@ -134,14 +147,34 @@ const TransactionPage = ()=>{
               </LocalizationProvider>
             </div>
           </div>
-          <div className='amount-wrapper flex items-end justify-between w-full lg:w-1/2'>
-            <div className='amount-container w-full'>
-              <label htmlFor="amount" className='block input-heading'>amount</label>
-              <input type="number" value={amount} placeholder='0' id='amount' className='outline-0 text-3xl w-full placeholder:text-(--input-value-color) placeholder:opacity-70' onChange={(e)=>handleTransactionData('amount', e.target.value)}/>
-            </div>
-            <div className='w-7 h-7 mb-1'>
-              <FontAwesomeIcon icon={faIndianRupeeSign} className='text-(--primary-color)'/>
-            </div>
+        </div>
+      </div>
+      <div className="category-notes-container flex flex-col lg:flex-row gap-5">
+        <div className="category-wrapper lg:w-1/2">
+          <p className="mb-2 input-heading">categories</p>
+          <div className="category-container grid grid-cols-3 md:grid-cols-4 gap-3">
+            {selectedType == 'expense' && expCategories.map((category, index) => {
+              return (
+                <CategoryIcon
+                  key={index}
+                  handleCategory={handleTransactionData}
+                  categoryName={category}
+                  type="card"
+                />
+              );
+            })}
+            {
+              selectedType == 'income' && incomeCategories.map((category, index) => {
+                return (
+                  <CategoryIcon
+                    key={index}
+                    handleCategory={handleTransactionData}
+                    categoryName={category}
+                    type="card"
+                  />
+                )
+              })
+            }
           </div>
         </div>
         <div className='category-notes-container flex flex-col lg:flex-row gap-5'>
@@ -202,6 +235,7 @@ const TransactionPage = ()=>{
           <FontAwesomeIcon icon={faFloppyDisk} className='turn-white'/>
         </div>
       </div>
+      </>
     );
 }
 
