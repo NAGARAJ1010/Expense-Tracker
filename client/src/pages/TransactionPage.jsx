@@ -220,35 +220,6 @@ const TransactionPage = () => {
               })}
           </div>
         </div>
-      </div>
-      <div className="category-notes-container flex flex-col lg:flex-row gap-5">
-        <div className="category-wrapper lg:w-1/2">
-          <p className="mb-2 input-heading">categories</p>
-          <div className="category-container grid grid-cols-3 md:grid-cols-4 gap-3">
-            {selectedType == "expense" &&
-              expCategories.map((category, index) => {
-                return (
-                  <CategoryIcon
-                    key={index}
-                    handleCategory={handleTransactionData}
-                    categoryName={category}
-                    type="card"
-                  />
-                );
-              })}
-            {selectedType == "income" &&
-              incomeCategories.map((category, index) => {
-                return (
-                  <CategoryIcon
-                    key={index}
-                    handleCategory={handleTransactionData}
-                    categoryName={category}
-                    type="card"
-                  />
-                );
-              })}
-          </div>
-        </div>
         <div className="flex flex-col gap-2 lg:w-1/2">
           <div className="notes-container">
             <p className="mb-2 input-heading">Notes</p>
