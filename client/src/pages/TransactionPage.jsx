@@ -113,7 +113,7 @@ const TransactionPage = () => {
     }
   };
   return (
-    <div className="transaction-container overflow-y-scroll relative px-4 pt-8 pb-20 flex flex-col gap-5 lg:gap-8 max-w-[80rem] m-auto">
+    <div className="transaction-container overflow-y-scroll relative px-4 pt-8 pb-20 flex flex-col gap-5 lg:gap-8 max-w-7xl m-auto">
       <div
         className="transaction__heading flex gap-2 items-center"
         onClick={() => navigate("/dashboard")}
@@ -126,7 +126,7 @@ const TransactionPage = () => {
         </p>
       </div>
       <div className=" p-1 rounded-4xl border-2 border-(--primary-color) lg:m-auto">
-        <div className="type-container relative z-10 flex justify-between bg-(--input-bg-color) rounded-4xl lg:w-[40rem]">
+        <div className="type-container relative z-10 flex justify-between bg-(--input-bg-color) rounded-4xl lg:w-160">
           <div
             className={`${
               selectedType == "expense" ? "text-white" : ""
@@ -148,9 +148,6 @@ const TransactionPage = () => {
             income
           </div>
         </div>
-        <p className="capitalize text-2xl font-medium select-none">
-          add transactions
-        </p>
       </div>
       <div className="amount-time-container gap-5 flex flex-col lg:flex-row-reverse">
         <div className="date-time-wrapper lg:w-1/2">

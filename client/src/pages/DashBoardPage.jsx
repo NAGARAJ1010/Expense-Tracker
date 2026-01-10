@@ -87,7 +87,7 @@ const DashBoardPage = () => {
   };
 
   return (
-    <div className="dashboard flex flex-col gap-4 items-center relative h-full max-w-[60rem] mx-auto">
+    <div className="dashboard flex flex-col gap-4 items-center relative h-full max-w-240 mx-auto">
       <div className="w-full text-start bg-(--primary-color) p-4 text-white">
         <p className="">Good Morning,</p>
         <p className="text-2xl capitalize">Nagaraj Ganesan</p>
