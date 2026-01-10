@@ -31,7 +31,6 @@ const TransactionPage = () => {
     "investment",
     "others",
   ];
-
   const incomeCategories = ["salary", "others"];
   const [selectedType, setSelectedType] = useState("expense");
   const [inputTag, setInputTag] = useState([]);
@@ -78,7 +77,7 @@ const TransactionPage = () => {
     setSelectedType(newType);
     const typeContainer = document.querySelector(".type-container");
     typeContainer.classList.toggle("toggle");
-    handleTransactionData(name.nodeValue, newType);
+    handleTransactionData(name.nodeValue, selectedType);
   };
 
   const formattedDate = (date) => dayjs(date).format("YYYY-MM-DD");
@@ -121,6 +120,33 @@ const TransactionPage = () => {
       >
         <div className="w-6 h-6">
           <FontAwesomeIcon icon={faArrowLeft} className="w-full h-full" />
+        </div>
+        <p className="capitalize text-2xl font-medium select-none">
+          add transactions
+        </p>
+      </div>
+      <div className=" p-1 rounded-4xl border-2 border-(--primary-color) lg:m-auto">
+        <div className="type-container relative z-10 flex justify-between bg-(--input-bg-color) rounded-4xl lg:w-[40rem]">
+          <div
+            className={`${
+              selectedType == "expense" ? "text-white" : ""
+            } cursor-pointer`}
+            name="transactionType"
+            value="expense"
+            onClick={handleToggle}
+          >
+            expense
+          </div>
+          <div
+            className={`${
+              selectedType == "income" ? "text-white" : ""
+            } cursor-pointer`}
+            name="transactionType"
+            value="income"
+            onClick={handleToggle}
+          >
+            income
+          </div>
         </div>
         <p className="capitalize text-2xl font-medium select-none">
           add transactions

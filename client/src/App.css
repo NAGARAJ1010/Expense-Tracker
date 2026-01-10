@@ -33,12 +33,6 @@ main {
 .turn-white {
   @apply invert brightness-0;
 }
-
-.gray-icon {
-  filter: brightness(0) saturate(100%) invert(88%) sepia(0%) saturate(0%)
-    brightness(70%);
-}
-
 input:-webkit-autofill {
   box-shadow: 0 0 0px 1000px var(--input-bg-color) inset !important;
   -webkit-box-shadow: 0 0 0px 1000px var(--input-bg-color) inset !important;
@@ -66,8 +60,7 @@ input:-webkit-autofill {
   @apply cursor-pointer uppercase text-white bg-(--primary-color) tracking-wider font-medium py-3 w-full rounded-xl border-2 hover:border-(--primary-color) hover:bg-white hover:text-(--primary-color) transition-colors duration-300;
 }
 
-.expense-card-container,
-.search-input-container {
+.expense-card-container {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
@@ -76,9 +69,7 @@ input:-webkit-autofill {
 .fa-circle-down,
 .fa-floppy-disk,
 .fa-indian-rupee-sign,
-.fa-plus,
-.fa-filter,
-.fa-xmark {
+.fa-plus {
   width: 100%;
   height: 100%;
 }

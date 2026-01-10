@@ -12,7 +12,6 @@ import NotFound from "./pages/NotFound";
 import { useState } from "react";
 import DashBoardPage from "./pages/DashBoardPage";
 import TransactionPage from "./pages/TransactionPage";
-import FiltersPage from "./pages/FiltersPage";
 function App() {
   const [authMode, setAuthMode] = useState("login");
   const router = createBrowserRouter(
@@ -38,7 +37,6 @@ function App() {
         <Route path="dashboard" element={<DashBoardPage />} />
         <Route path="transaction" element={<TransactionPage />} />
         <Route path="transaction/:id" element={<TransactionPage />} />
-        <Route path="filterTransactions" element={<FiltersPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     )

@@ -19,6 +19,47 @@ const DashBoardPage = () => {
     fetchTransactions();
   }, []);
 
+  useEffect(() => {
+    if (Array.isArray(transactions)) {
+      const summary = calculateFinancialSummary(transactions);
+      setSummary(summary);
+    }
+  }, [transactions]);
+
+  const calculateFinancialSummary = (transactions = []) => {
+    return transactions?.reduce(
+      (summary, transaction) => {
+        const amount = Number(transaction.amount) || 0;
+
+        if (transaction.transactionType === "income") {
+          summary.income += amount;
+          summary.balance += amount;
+        }
+
+        if (transaction.transactionType === "expense") {
+          summary.expense += amount;
+          summary.balance -= amount;
+        }
+
+        return summary;
+      },
+      {
+        income: 0,
+        expense: 0,
+        balance: 0,
+      }
+    );
+  };
+
+  const fetchTransactions = async () => {
+    try {
+      const result = await getTransactions();
+      setTransactions(result?.data.transactions);
+    } catch (err) {
+      console.error("Error fetching transactions:", err);
+    }
+  };
+
   const handleTransaction = (field, value) => {
     dispatch(setTransactionField({ field, value }));
   };
@@ -68,14 +109,11 @@ const DashBoardPage = () => {
             </div>
           </div>
           <div className="flex flex-col gap-2 w-full mt-4">
-            <p
-              className="text-end"
-              onClick={() => navigate("/filterTransactions")}
-            >
+            <p className="text-end">
               Show All
               <FontAwesomeIcon icon={faArrowRight} className="w-5 ml-2" />
             </p>
-            {transactions.length > 0 &&
+            {transactions?.length > 0 &&
               transactions.map((data, index) => {
                 return (
                   <ExpenseCard
