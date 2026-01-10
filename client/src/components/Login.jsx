@@ -8,25 +8,29 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState("hidden");
   const [toggleIcon, setToggleIcon] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const handlePassword = (e) => {
-    
-  }
+  const handlePassword = (e) => {};
 
-  const {email, password} = useSelector(store => store.register);
+  const { email, password } = useSelector((store) => store.register);
   const dispatch = useDispatch();
   const toggleEyeIcon = () => {
-    setToggleIcon(prev => !prev);
-  }
+    setToggleIcon((prev) => !prev);
+  };
 
-  const handleChange = (e)=>{
-    const {name, value} = e.target;
-    dispatch(setRegisterField({field:name, value}));
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    dispatch(setRegisterField({ field: name, value }));
+  };
   return (
     <>
       <div className="form-input-container">
         <label htmlFor="email">Email</label>
-        <input type="text" id="email" name="email" value={email} onChange={handleChange}/>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+        />
       </div>
       <div
         className="form-input-container relative"

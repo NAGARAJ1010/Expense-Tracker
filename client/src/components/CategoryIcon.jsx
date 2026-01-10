@@ -1,15 +1,18 @@
-import '../css/category.css';
+import "../css/category.css";
 import FoodDinningIcon from "../assets/foodanddinning.svg";
 import EntertainmentIcon from "../assets/entertainment.svg";
 import ShoppingIcon from "../assets/shopping.svg";
 import TravellingIcon from "../assets/travel.svg";
 import MedicalIcon from "../assets/medical.svg";
 import InvestmentIcon from "../assets/investment.svg";
-import SalaryIcon from "../assets/salary.svg";
 import OthersIcon from "../assets/others.svg";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
-const CategoryIcon = ({ categoryName = category, type = "icon", handleCategory }) => {
+const CategoryIcon = ({
+  categoryName = category,
+  type = "icon",
+  handleCategory,
+}) => {
   const categoryImg = {
     food: {
       color: "#ff922b",
@@ -41,19 +44,14 @@ const CategoryIcon = ({ categoryName = category, type = "icon", handleCategory }
       bgColor: "bg-[#749e4b]",
       img: InvestmentIcon,
     },
-    salary: {
-      color: "#92c55e",
-      bgColor: "bg-[#749e4b]",
-      img: SalaryIcon,
-    },
     others: {
       color: "",
-      bgColor:"bg-[#4C75A3]",
+      bgColor: "bg-[#4C75A3]",
       img: OthersIcon,
-    }
+    },
   };
 
-  const {category} = useSelector(state=> state.transaction);
+  const { category } = useSelector((state) => state.transaction);
 
   return (
     <>
@@ -66,20 +64,33 @@ const CategoryIcon = ({ categoryName = category, type = "icon", handleCategory }
             alt=""
             className="w-full h-full turn-white"
             style={{
-              filter:
-                "invert(1) brightness(1)",
+              filter: "invert(1) brightness(1)",
             }}
           />
         </div>
       )}
       {type == "card" && (
-        <div className={`category ${category === '' ? '' : category === categoryName ? 'shadow-2xl' : 'unselected-options'} ${categoryImg[categoryName]?.bgColor}`} onClick={()=>handleCategory('category', categoryName)} >
+        <div
+          className={`category ${
+            category === ""
+              ? ""
+              : category === categoryName
+              ? "shadow-2xl"
+              : "unselected-options"
+          } ${categoryImg[categoryName]?.bgColor}`}
+          onClick={() => handleCategory("category", categoryName)}
+        >
           <div className={`w-12 h-12 category-img`}>
             <img
               src={categoryImg[categoryName]?.img}
               alt={categoryImg[categoryName]}
-              className={`w-10 h-10 object-cover ${categoryName == 'travel' ? 'w-12 h-12': ''}`}
-              style={{filter: "invert(1) brightness(2) drop-shadow(2px 2px 4px rgba(0,0,0,0.5))"}}
+              className={`w-10 h-10 object-cover ${
+                categoryName == "travel" ? "w-12 h-12" : ""
+              }`}
+              style={{
+                filter:
+                  "invert(1) brightness(2) drop-shadow(2px 2px 4px rgba(0,0,0,0.5))",
+              }}
             />
           </div>
           <p className="category-title">{categoryName}</p>
