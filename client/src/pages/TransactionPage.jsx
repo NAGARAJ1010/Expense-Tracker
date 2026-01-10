@@ -255,11 +255,10 @@ const TransactionPage = () => {
                     key={index}
                     className="py-1 px-2 rounded-md bg-(--contrast-color) text-sm text-white text-center align-middle tracking-wider flex items-center"
                   >
-                    <span>#</span>
                     {tag}
                     <div
                       data-index={index}
-                      className="ml-2 text-xs"
+                      className="ml-2 text-xs w-4 h-4"
                       onClick={(e) => {
                         const idx = Number(e.currentTarget.dataset.index);
                         setInputTag((prev) => prev.filter((_, i) => i !== idx));
