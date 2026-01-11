@@ -63,7 +63,6 @@ const DashBoardPage = () => {
       console.error("Error fetching transactions:", err);
     }
   };
-
   const handleTransaction = (field, value) => {
     dispatch(setTransactionField({ field, value }));
   };
@@ -100,7 +99,7 @@ const DashBoardPage = () => {
   };
 
   return (
-    <div className="dashboard flex flex-col gap-4 items-center relative h-full max-w-[60rem] mx-auto">
+    <div className="dashboard flex flex-col gap-4 items-center relative h-full max-w-240 mx-auto">
       <div className="w-full text-start bg-(--primary-color) p-4 text-white">
         <p className="">Good Morning,</p>
         <p className="text-2xl capitalize">Nagaraj Ganesan</p>
@@ -121,11 +120,14 @@ const DashBoardPage = () => {
             </div>
           </div>
           <div className="flex flex-col gap-2 w-full mt-4">
-            <p className="text-end">
+            <p
+              className="text-end"
+              onClick={() => navigate("/filterTransactions")}
+            >
               Show All
               <FontAwesomeIcon icon={faArrowRight} className="w-5 ml-2" />
             </p>
-            {transactions?.length > 0 &&
+            {transactions.length > 0 &&
               transactions.map((data, index) => {
                 return (
                   <ExpenseCard
