@@ -4,7 +4,11 @@ import Menu from "../components/Menu";
 import { faArrowRight, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { getTransactionById, getTransactions } from "../api/transactionService";
+import {
+  deleteTransaction,
+  getTransactionById,
+  getTransactions,
+} from "../api/transactionService";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setTransactionField } from "../redux/transactionSlice";
@@ -87,6 +91,14 @@ const DashBoardPage = () => {
     }
   };
 
+  const removeTransaction = async (transactionId) => {
+    try {
+      await deleteTransaction(transactionId);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="dashboard flex flex-col gap-4 items-center relative h-full max-w-[60rem] mx-auto">
       <div className="w-full text-start bg-(--primary-color) p-4 text-white">
@@ -120,6 +132,7 @@ const DashBoardPage = () => {
                     key={index}
                     data={data}
                     viewTransaction={viewTransaction}
+                    removeTransaction={removeTransaction}
                   />
                 );
               })}

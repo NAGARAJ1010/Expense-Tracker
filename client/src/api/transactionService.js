@@ -23,3 +23,10 @@ export const updateTransaction = async (transactionId, data) => {
   );
   return result;
 };
+
+export const deleteTransaction = async (transactionId) => {
+  const result = await api.delete(
+    `/transaction/deleteTransaction/${transactionId}`
+  );
+  return result;
+};
